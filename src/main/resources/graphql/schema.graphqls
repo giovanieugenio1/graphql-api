@@ -8,6 +8,12 @@ type Book {
 
 type Query {
     allBooks: [Book!]!
-    bookById(id: ID!): Book!
+    bookById(id: ID!): Book
+    booksByAuthor(author: String!): [Book!]!
+}
 
+type Mutation {
+    addBook(title: String!, author: String!, isbn: String!, publicationYear: Int!): Book!
+    updateBook(id: ID! ,title: String!, author: String!, isbn: String!, publicationYear: Int!): Book!
+    deleteBook(id: ID!): Boolean
 }
