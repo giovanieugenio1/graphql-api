@@ -7,9 +7,12 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.Collections;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
-public class BookController {
+public class BookQueryController {
 
     private final BookRepository bookRepository;
 
@@ -24,7 +27,8 @@ public class BookController {
     }
 
     @QueryMapping
-    public Iterable<Book> booksByAuhor(@Argument String author) {
-        return bookRepository.findByAuthor(author);
+    public Iterable<Book> booksByAuthor(@Argument String author) {
+        List<Book> books = bookRepository.findByAuthor(author);
+        return books != null ? books : Collections.emptyList();
     }
 }
